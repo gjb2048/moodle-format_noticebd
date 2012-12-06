@@ -4,10 +4,10 @@ Topic based course format with the latest post in the news forum displayed at th
 
 Installation Requirements
 -------------------------
-This version works with Moodle 2.3.2+ version 2012062502.06 (Build: 20121014) and above until the next release.
+This version works with Moodle 2.4 version 2012120300.00 (Build: 20121203) and above until the next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/23/en/Installing_Moodle'.
+'docs.moodle.org/24/en/Installing_Moodle'.
 
 Installation
 ------------
@@ -15,14 +15,16 @@ Installation
    format relies on underlying core code.
 2. If upgrading from a previous version of the format for Moodle 1.9 or 2.0 you should remove the old 'nb' folder
    in '/course/format' and continue.
-3. Put Moodle in 'Maintenance Mode' on 'docs.moodle.org/en/admin/setting/maintenancemode' so that there are no 
+3. If upgrading from the Moodle 2.3 version, make a backup of the old files in the 'noticebd' folder, clear it out
+   and replace with all the files in this version.
+4. Put Moodle in 'Maintenance Mode' on 'docs.moodle.org/en/admin/setting/maintenancemode' so that there are no 
    users using it bar you as the administrator - if you have not already done so.
-4. Copy 'noticebd' to '/course/format/'.
-5. If using a Unix based system, chmod 755 on config.php - I have not tested this but have been told that it
+5. Copy 'noticebd' to '/course/format/'.
+6. If using a Unix based system, chmod 755 on config.php - I have not tested this but have been told that it
    needs to be done.
-6. Login as an administrator and follow standard the 'plugin' update notification.  If needed, go to
+7. Login as an administrator and follow standard the 'plugin' update notification.  If needed, go to
    'Site administration' -> 'Notifications' if this does not happen.
-7. Put Moodle out of Maintenance Mode.
+8. Put Moodle out of Maintenance Mode.
 
 Uninstallation
 --------------
@@ -36,7 +38,7 @@ Uninstallation
 Usage
 -----
 1. When creating a new course, select the course format as 'Noticeboard format' from the list of available options.
-2. To change an existing course, edit the course settings (http://docs.moodle.org/23/en/course/edit) and select the
+2. To change an existing course, edit the course settings (http://docs.moodle.org/24/en/course/edit) and select the
    'Noticeboard format' from the list of available options.
 
 Notes
@@ -57,6 +59,9 @@ Version Information
 
 4th November 2012 - Version 2.3.1 - STABLE
 1. Updated 'version.php' to indicate that the format is stable after testing.
+
+6th December 2012 - Version 2.4.0.1 - BETA
+1. First rewrite version for Moodle 2.3.2 at 'Beta' for user acceptance testing.
 
 License
 -------
@@ -85,6 +90,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 4th November 2012.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 6th December 2012.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard
