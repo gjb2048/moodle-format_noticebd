@@ -43,7 +43,7 @@ Usage
 
 Notes
 -----
-1. Only adiministrators can add, edit and remove activites and resources (whilst in the format) from the general
+1. Only adiministrators can add, edit and remove activities and resources (whilst in the format) from the general
    section (section 0), as to prevent accidental deletion of the 'news' forum upon which the format relies.  If it is
    deleted, then a page refresh will recreate the forum but all previous posts will be lost.
 2. Any title and summary that has been previously set for the general section will not be shown.
@@ -62,6 +62,9 @@ Version Information
 
 6th December 2012 - Version 2.4.0.1 - BETA
 1. First rewrite version for Moodle 2.3.2 at 'Beta' for user acceptance testing.
+
+7th November 2012 - Version 2.4.1 - STABLE
+1. Updated 'version.php' to indicate that the format is stable after testing.
 
 License
 -------
@@ -90,6 +93,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 6th December 2012.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 7th December 2012.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard

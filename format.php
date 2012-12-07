@@ -1,4 +1,5 @@
 <?php
+
 /** This file is part of Moodle - http://moodle.org/
 
  *  Moodle is free software: you can redistribute it and/or modify
@@ -20,11 +21,10 @@
  * @package format_noticebd
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir.'/filelib.php');
-require_once($CFG->libdir.'/completionlib.php');
+require_once($CFG->libdir . '/filelib.php');
+require_once($CFG->libdir . '/completionlib.php');
 
 // Horrible backwards compatible parameter aliasing..
 if ($topic = optional_param('topic', 0, PARAM_INT)) { // Topics and Grid old section parameter.
@@ -49,7 +49,7 @@ if ($ctopic = optional_param('ctopics', 0, PARAM_INT)) { // Collapsed Topics old
 
 $context = context_course::instance($course->id);
 
-if (($marker >=0) && has_capability('moodle/course:setcurrentsection', $context) && confirm_sesskey()) {
+if (($marker >= 0) && has_capability('moodle/course:setcurrentsection', $context) && confirm_sesskey()) {
     $course->marker = $marker;
     course_set_marker($course->id, $marker);
 }
