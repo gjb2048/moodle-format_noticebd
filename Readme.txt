@@ -4,7 +4,7 @@ Topic based course format with the latest post in the news forum displayed at th
 
 Installation Requirements
 -------------------------
-This version works with Moodle 2.4 version 2012120300.00 (Build: 20121203) and above until the next release.
+This version works with Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118) and above until the next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
 'docs.moodle.org/24/en/Installing_Moodle'.
@@ -20,11 +20,9 @@ Installation
 4. Put Moodle in 'Maintenance Mode' on 'docs.moodle.org/en/admin/setting/maintenancemode' so that there are no 
    users using it bar you as the administrator - if you have not already done so.
 5. Copy 'noticebd' to '/course/format/'.
-6. If using a Unix based system, chmod 755 on config.php - I have not tested this but have been told that it
-   needs to be done.
-7. Login as an administrator and follow standard the 'plugin' update notification.  If needed, go to
+6. Login as an administrator and follow standard the 'plugin' update notification.  If needed, go to
    'Site administration' -> 'Notifications' if this does not happen.
-8. Put Moodle out of Maintenance Mode.
+7. Put Moodle out of Maintenance Mode.
 
 Uninstallation
 --------------
@@ -43,7 +41,7 @@ Usage
 
 Notes
 -----
-1. Only adiministrators can add, edit and remove activities and resources (whilst in the format) from the general
+1. Only administrators can add, edit and remove activities and resources (whilst in the format) from the general
    section (section 0), as to prevent accidental deletion of the 'news' forum upon which the format relies.  If it is
    deleted, then a page refresh will recreate the forum but all previous posts will be lost.
 2. Any title and summary that has been previously set for the general section will not be shown.
@@ -65,6 +63,9 @@ Version Information
 
 7th November 2012 - Version 2.4.1 - STABLE
 1. Updated 'version.php' to indicate that the format is stable after testing.
+
+21st January 2013 - Version 2.4.1.1
+1. Changes to 'renderer.php' because of MDL-36095 hence requiring Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118) and above.
 
 License
 -------
@@ -93,6 +94,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 7th December 2012.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 21st January 2013.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard
