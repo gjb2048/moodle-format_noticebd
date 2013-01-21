@@ -4,7 +4,7 @@ Topic based course format with the latest post in the news forum displayed at th
 
 Installation Requirements
 -------------------------
-This version works with Moodle 2.3.2+ version 2012062502.06 (Build: 20121014) and above until the next release.
+This version works with Moodle version 2012062504.01 release 2.3.4+ (Build: 20130118) and above until the next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
 'docs.moodle.org/23/en/Installing_Moodle'.
@@ -58,6 +58,9 @@ Version Information
 4th November 2012 - Version 2.3.1 - STABLE
 1. Updated 'version.php' to indicate that the format is stable after testing.
 
+21st January 2013 - Version 2.3.1.1 - STABLE
+1.  Changes to 'renderer.php' because of MDL-36095 hence requiring Moodle version 2012062504.01 release 2.3.4+ (Build: 20130118) and above.
+
 License
 -------
 This file is part of Moodle - http://moodle.org/
@@ -85,6 +88,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 4th November 2012.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 21st January 2013.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard

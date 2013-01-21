@@ -23,8 +23,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2012110400;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2012110401;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->maturity = MATURITY_STABLE;
-$plugin->requires  = 2012062502.06;        // Requires Moodle 2.3.2+ (Build: 20121014).
+$plugin->requires  = 2012062504.01; // 2.3.4+ (Build: 20130118)
 $plugin->component = 'format_noticebd';    // Full name of the plugin (used for diagnostics).
-$plugin->release = '2.3.1';
+$plugin->release = '2.3.1.1';
