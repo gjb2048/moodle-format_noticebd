@@ -67,6 +67,9 @@ Version Information
 21st January 2013 - Version 2.4.1.1
 1. Changes to 'renderer.php' because of MDL-36095 hence requiring Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118) and above.
 
+24th February 2013 - Version 2.4.1.2
+1. Changes because of MDL-37976.
+
 License
 -------
 This file is part of Moodle - http://moodle.org/
@@ -94,6 +97,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 21st January 2013.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 24th February 2013.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard
