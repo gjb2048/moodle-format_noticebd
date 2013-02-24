@@ -50,25 +50,26 @@ Version Information
 -------------------
 
 25th October 2012 - Version 2.3.0.1 - BETA
-1. First rewrite version for Moodle 2.3.2 at 'Beta' for user acceptance testing.
+  1. First rewrite version for Moodle 2.3.2 at 'Beta' for user acceptance testing.
 
 1st November 2012 - Version 2.3.0.2 - BETA
-1. Added styles in 'styles.css' to tidy up layout in different standard themes and IE8.
+  1. Added styles in 'styles.css' to tidy up layout in different standard themes and IE8.
 
 4th November 2012 - Version 2.3.1 - STABLE
-1. Updated 'version.php' to indicate that the format is stable after testing.
+  1. Updated 'version.php' to indicate that the format is stable after testing.
 
 6th December 2012 - Version 2.4.0.1 - BETA
-1. First rewrite version for Moodle 2.3.2 at 'Beta' for user acceptance testing.
+  1. First rewrite version for Moodle 2.3.2 at 'Beta' for user acceptance testing.
 
 7th November 2012 - Version 2.4.1 - STABLE
-1. Updated 'version.php' to indicate that the format is stable after testing.
+  1. Updated 'version.php' to indicate that the format is stable after testing.
 
 21st January 2013 - Version 2.4.1.1
-1. Changes to 'renderer.php' because of MDL-36095 hence requiring Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118) and above.
+  1. Changes to 'renderer.php' because of MDL-36095 hence requiring Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118) and above.
 
 24th February 2013 - Version 2.4.1.2
-1. Changes because of MDL-37976.
+  1. Changes because of MDL-37976.
+  2. Changes because of MDL-37901.
 
 License
 -------
