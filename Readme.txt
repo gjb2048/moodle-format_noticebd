@@ -2,12 +2,15 @@ Introduction
 ------------
 Topic based course format with the latest post in the news forum displayed at the top.
 
-Installation Requirements
--------------------------
-This version works with Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118) and above until the next release.
+Required version of Moodle
+==========================
+This version works with Moodle version 2013050200.00 release 2.5beta+ (Build: 20130502) and above until the next release.
+
+NOTE: This is a pre-release Moodle 2.5 Beta version that must NOT be used on production servers.  It is subject to change
+at any time without notice.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/24/en/Installing_Moodle'.
+'docs.moodle.org/25/en/Installing_Moodle'.
 
 Installation
 ------------
@@ -71,6 +74,12 @@ Version Information
   1. Changes because of MDL-37976.
   2. Changes because of MDL-37901.
 
+8th May 2013 - Version 2.5.0.1 - BETA
+  1. First beta for Moodle 2.5beta.
+  2. Removed '.jumpmenu' from styles.css because of MDL-38907.
+  3. Added automatic 'Purge all caches' when upgrading.  If this appears not to work by lack of display etc. then perform a
+     manual 'Purge all caches' under 'Home -> Site administration -> Development -> Purge all caches'.
+
 License
 -------
 This file is part of Moodle - http://moodle.org/
@@ -98,6 +107,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 24th February 2013.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 8th May 2013.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard

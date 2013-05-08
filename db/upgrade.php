@@ -1,4 +1,5 @@
 <?php
+
 /** This file is part of Moodle - http://moodle.org/
 
  *  Moodle is free software: you can redistribute it and/or modify
@@ -20,11 +21,12 @@
  * @package format_noticebd
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+function xmldb_format_noticebd_upgrade($oldversion = 0) {
 
-defined('MOODLE_INTERNAL') || die();
+    // Automatic 'Purge all caches'....
+    if ($oldversion < 2013050800) {
+        purge_all_caches();
+    }
 
-$plugin->version   = 2013050800;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->maturity = MATURITY_BETA;
-$plugin->requires  = 2013050200.00; // 2.5beta+ (Build: 20130502).
-$plugin->component = 'format_noticebd';    // Full name of the plugin (used for diagnostics).
-$plugin->release = '2.5.0.1';
+    return true;
+}
