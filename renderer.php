@@ -282,10 +282,10 @@ class format_noticebd_renderer extends format_section_renderer_base {
      * Output the html for a multiple section page
      *
      * @param stdClass $course The course entry from DB
-     * @param array $sections The course_sections entries from the DB
-     * @param array $mods used for print_section()
-     * @param array $modnames used for print_section()
-     * @param array $modnamesused used for print_section()
+     * @param array $sections (argument not used)
+     * @param array $mods (argument not used)
+     * @param array $modnames (argument not used)
+     * @param array $modnamesused (argument not used)
      */
     public function print_multiple_section_page($course, $sections, $mods, $modnames, $modnamesused) {
         global $PAGE, $USER;
@@ -308,13 +308,15 @@ class format_noticebd_renderer extends format_section_renderer_base {
         foreach ($modinfo->get_section_info_all() as $section => $thissection) {
             if ($section == 0) {
                 // 0-section is displayed a little different then the others
-                echo $this->section_header($thissection, $course, false, 0);
-                $this->print_noticeboard($course);
-                if (($PAGE->user_is_editing()) && (is_siteadmin($USER))) {
-                    print_section($course, $thissection, $mods, $modnamesused, true, "100%", false, 0);
-                    print_section_add_menus($course, 0, $modnames, false, false, 0);
+                if ($thissection->summary or !empty($modinfo->sections[0]) or $PAGE->user_is_editing()) {
+                    echo $this->section_header($thissection, $course, false, 0);
+                    $this->print_noticeboard($course);
+                    if (($PAGE->user_is_editing()) && (is_siteadmin($USER))) {
+                        echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
+                        echo $this->courserenderer->course_section_add_cm_control($course, 0, 0);
+                    }
+                    echo $this->section_footer();
                 }
-                echo $this->section_footer();
                 continue;
             }
             if ($section > $course->numsections) {
@@ -322,9 +324,10 @@ class format_noticebd_renderer extends format_section_renderer_base {
                 continue;
             }
             // Show the section if the user is permitted to access it, OR if it's not available
-            // but showavailability is turned on
+            // but showavailability is turned on (and there is some available info text).
             $showsection = $thissection->uservisible ||
-                    ($thissection->visible && !$thissection->available && $thissection->showavailability);
+                    ($thissection->visible && !$thissection->available && $thissection->showavailability
+                    && !empty($thissection->availableinfo));
             if (!$showsection) {
                 // Hidden section message is overridden by 'unavailable' control
                 // (showavailability option).
@@ -341,8 +344,8 @@ class format_noticebd_renderer extends format_section_renderer_base {
             } else {
                 echo $this->section_header($thissection, $course, false, 0);
                 if ($thissection->uservisible) {
-                    echo $this->courserenderer->course_section_cm_list($course, $thissection);
-                    echo $this->courserenderer->course_section_add_cm_control($course, $section);
+                    echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
+                    echo $this->courserenderer->course_section_add_cm_control($course, $section, 0);
                 }
                 echo $this->section_footer();
             }
@@ -356,7 +359,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
                     continue;
                 }
                 echo $this->stealth_section_header($section);
-                print_section($course, $thissection, null, null, true, "100%", false, 0);
+                echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
                 echo $this->stealth_section_footer();
             }
 

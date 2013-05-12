@@ -80,6 +80,10 @@ Version Information
   3. Added automatic 'Purge all caches' when upgrading.  If this appears not to work by lack of display etc. then perform a
      manual 'Purge all caches' under 'Home -> Site administration -> Development -> Purge all caches'.
 
+12th May 2013 - Version 2.5.0.2 - Beta
+  1. Changes for MDL-39542.
+  2. Updated 'print_multiple_section_page' from base class.
+
 License
 -------
 This file is part of Moodle - http://moodle.org/
@@ -107,6 +111,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 8th May 2013.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 12th May 2013.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard
