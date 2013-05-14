@@ -23,8 +23,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2013051200;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->maturity = MATURITY_BETA;
-$plugin->requires  = 2013050200.00; // 2.5beta+ (Build: 20130502).
+$plugin->version = 2013051400;
+$plugin->maturity = MATURITY_STABLE;
+$plugin->requires = 2013051400.00; // 2.5 (Build: 20130514).
 $plugin->component = 'format_noticebd';    // Full name of the plugin (used for diagnostics).
-$plugin->release = '2.5.0.2';
+$plugin->release = '2.5.1';
