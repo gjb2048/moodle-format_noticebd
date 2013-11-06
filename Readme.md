@@ -48,28 +48,17 @@ Notes
 
 Version Information
 ===================
+6th November 2013 Version 2.6.0.1
+  1.  Initial BETA code for Moodle 2.6.
+  2.  Changes for 'Accessibility' based upon MDL-41252.
+  3.  Implemented MDL-21097.
 
-25th October 2012 - Version 2.3.0.1 - BETA
-  1. First rewrite version for Moodle 2.3.2 at 'Beta' for user acceptance testing.
+14th May 2013 Version 2.5.1 - Stable
+  1.  First stable version for Moodle 2.5 stable.
 
-1st November 2012 - Version 2.3.0.2 - BETA
-  1. Added styles in 'styles.css' to tidy up layout in different standard themes and IE8.
-
-4th November 2012 - Version 2.3.1 - STABLE
-  1. Updated 'version.php' to indicate that the format is stable after testing.
-
-6th December 2012 - Version 2.4.0.1 - BETA
-  1. First rewrite version for Moodle 2.3.2 at 'Beta' for user acceptance testing.
-
-7th November 2012 - Version 2.4.1 - STABLE
-  1. Updated 'version.php' to indicate that the format is stable after testing.
-
-21st January 2013 - Version 2.4.1.1
-  1. Changes to 'renderer.php' because of MDL-36095 hence requiring Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118) and above.
-
-24th February 2013 - Version 2.4.1.2
-  1. Changes because of MDL-37976.
-  2. Changes because of MDL-37901.
+12th May 2013 - Version 2.5.0.2 - Beta
+  1. Changes for MDL-39542.
+  2. Updated 'print_multiple_section_page' from base class.
 
 8th May 2013 - Version 2.5.0.1 - BETA
   1. First beta for Moodle 2.5beta.
@@ -77,12 +66,27 @@ Version Information
   3. Added automatic 'Purge all caches' when upgrading.  If this appears not to work by lack of display etc. then perform a
      manual 'Purge all caches' under 'Home -> Site administration -> Development -> Purge all caches'.
 
-12th May 2013 - Version 2.5.0.2 - Beta
-  1. Changes for MDL-39542.
-  2. Updated 'print_multiple_section_page' from base class.
+24th February 2013 - Version 2.4.1.2
+  1. Changes because of MDL-37976.
+  2. Changes because of MDL-37901.
 
-14th May 2013 Version 2.5.1 - Stable
-  1.  First stable version for Moodle 2.5 stable.
+21st January 2013 - Version 2.4.1.1
+  1. Changes to 'renderer.php' because of MDL-36095 hence requiring Moodle version 2012120301.02 release 2.4.1+ (Build: 20130118) and above.
+
+7th November 2012 - Version 2.4.1 - STABLE
+  1. Updated 'version.php' to indicate that the format is stable after testing.
+
+6th December 2012 - Version 2.4.0.1 - BETA
+  1. First rewrite version for Moodle 2.3.2 at 'Beta' for user acceptance testing.
+
+4th November 2012 - Version 2.3.1 - STABLE
+  1. Updated 'version.php' to indicate that the format is stable after testing.
+
+1st November 2012 - Version 2.3.0.2 - BETA
+  1. Added styles in 'styles.css' to tidy up layout in different standard themes and IE8.
+
+25th October 2012 - Version 2.3.0.1 - BETA
+  1. First rewrite version for Moodle 2.3.2 at 'Beta' for user acceptance testing.
 
 License
 =======
@@ -111,6 +115,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 14th May 2013.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 6th November 2013.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard

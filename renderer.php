@@ -33,6 +33,20 @@ require_once($CFG->dirroot.'/course/format/renderer.php');
 class format_noticebd_renderer extends format_section_renderer_base {
 
     /**
+     * Constructor method, calls the parent constructor - MDL-21097
+     *
+     * @param moodle_page $page
+     * @param string $target one of rendering target constants
+     */
+    public function __construct(moodle_page $page, $target) {
+        parent::__construct($page, $target);
+
+        // Since format_noticebd_renderer::section_edit_controls() only displays the 'Set current section' control when editing mode is on
+        // we need to be sure that the link 'Turn editing mode on' is available for a user who does not have any other managing capability.
+        $page->set_other_editing_capability('moodle/course:setcurrentsection');
+    }
+
+    /**
      * Generate the starting container html for a list of sections
      * @return string HTML to output.
      */
@@ -102,66 +116,6 @@ class format_noticebd_renderer extends format_section_renderer_base {
     }
 
     /**
-     * Generate the display of the header part of a section before
-     * course modules are included
-     *
-     * @param stdClass $section The course_section entry from DB
-     * @param stdClass $course The course entry from DB
-     * @param bool $onsectionpage true if being printed on a single-section page
-     * @param int $sectionreturn The section to return to after an action
-     * @return string HTML to output.
-     */
-    protected function section_header($section, $course, $onsectionpage, $sectionreturn=null) {
-        global $PAGE;
-
-        $o = '';
-        $sectionstyle = '';
-
-        if ($section->section != 0) {
-            // Only in the non-general sections.
-            if (!$section->visible) {
-                $sectionstyle = ' hidden';
-            } else if (course_get_format($course)->is_section_current($section)) {
-                $sectionstyle = ' current';
-            }
-        }
-
-        $o.= html_writer::start_tag('li', array('id' => 'section-'.$section->section,
-            'class' => 'section main clearfix'.$sectionstyle));
-
-        $leftcontent = $this->section_left_content($section, $course, $onsectionpage);
-        $o.= html_writer::tag('div', $leftcontent, array('class' => 'left side'));
-
-        $rightcontent = $this->section_right_content($section, $course, $onsectionpage);
-        $o.= html_writer::tag('div', $rightcontent, array('class' => 'right side'));
-        $o.= html_writer::start_tag('div', array('class' => 'content'));
-
-        // When not on a section page, we display the section titles except the general section.
-        if (!$onsectionpage && $section->section != 0) {
-            $o.= $this->output->heading($this->section_title($section, $course), 3, 'sectionname');
-        }
-
-        $context = context_course::instance($course->id);
-        if ($section->section != 0) {
-            $o.= html_writer::start_tag('div', array('class' => 'summary'));
-            $o.= $this->format_summary_text($section);
-
-            if ($PAGE->user_is_editing() && has_capability('moodle/course:update', $context)) {
-                $url = new moodle_url('/course/editsection.php', array('id'=>$section->id, 'sr'=>$sectionreturn));
-                $o.= html_writer::link($url,
-                    html_writer::empty_tag('img', array('src' => $this->output->pix_url('t/edit'),
-                        'class' => 'iconsmall edit', 'alt' => get_string('edit'))),
-                    array('title' => get_string('editsummary')));
-            }
-            $o.= html_writer::end_tag('div');
-        }
-
-        $o .= $this->section_availability_message($section,has_capability('moodle/course:viewhiddensections', $context));
-
-        return $o;
-    }
-
-    /**
      * Outputs the latest news item.
      * @global stdClass $OUTPUT Output renderer instance.
      * @param stdClass $course The course to use.
@@ -170,7 +124,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
         global $OUTPUT;
         if ($forum = forum_get_course_forum($course->id, 'news')) {
             $cm = get_coursemodule_from_instance('forum', $forum->id);
-            $context = get_context_instance(CONTEXT_MODULE, $cm->id);
+            $context = context_module::instance($cm->id);
 
             echo $this->output->heading(get_string('latestmessage','format_noticebd'), 3, 'sectionname');
             echo '<div class="subscribelink">', forum_get_subscribe_link($forum, $context), '</div>';
@@ -237,15 +191,15 @@ class format_noticebd_renderer extends format_section_renderer_base {
         // Title with section navigation links.
         $sectionnavlinks = $this->get_nav_links($course, $sections, $displaysection);
         $sectiontitle = '';
-        $sectiontitle .= html_writer::start_tag('div', array('class' => 'section-navigation header headingblock'));
+        $sectiontitle .= html_writer::start_tag('div', array('class' => 'section-navigation navigationtitle'));
         $sectiontitle .= html_writer::tag('span', $sectionnavlinks['previous'], array('class' => 'mdl-left'));
         $sectiontitle .= html_writer::tag('span', $sectionnavlinks['next'], array('class' => 'mdl-right'));
         // Title attributes
-        $titleattr = 'mdl-align title';
-        if (!$sections[$displaysection]->visible) {
-            $titleattr .= ' dimmed_text';
+        $classes = 'sectionname';
+        if (!$thissection->visible) {
+            $classes .= ' dimmed_text';
         }
-        $sectiontitle .= html_writer::tag('div', get_section_name($course, $sections[$displaysection]), array('class' => $titleattr));
+        $sectiontitle .= $this->output->heading(get_section_name($course, $displaysection), 3, $classes);
         $sectiontitle .= html_writer::end_tag('div');
         echo $sectiontitle;
 
