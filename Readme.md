@@ -49,7 +49,7 @@ Notes
 
 Version Information
 ===================
-6th November 2013 Version 2.6.0.1
+14th November 2013 Version 2.6.0.1
   1.  Initial BETA code for Moodle 2.6.
   2.  Changes for 'Accessibility' based upon MDL-41252.
   3.  Implemented MDL-21097.
@@ -116,6 +116,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 6th November 2013.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 14th November 2013.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard
