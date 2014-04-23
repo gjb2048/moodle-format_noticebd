@@ -120,7 +120,6 @@ class format_noticebd extends format_base {
     public function supports_ajax() {
         $ajaxsupport = new stdClass();
         $ajaxsupport->capable = true;
-        $ajaxsupport->testedbrowsers = array('MSIE' => 6.0, 'Gecko' => 20061111, 'Safari' => 531, 'Chrome' => 6.0);
         return $ajaxsupport;
     }
 
