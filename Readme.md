@@ -4,7 +4,7 @@ Topic based course format with the latest post in the news forum displayed at th
 
 Required version of Moodle
 ==========================
-This version works with Moodle version 2014041700.00 release 2.7beta+ (Build: 20140417) and above within the 2.7 branch until the
+This version works with Moodle version 2014051200.00 release 2.7 (Build: 20140512) and above within the 2.7 branch until the
 next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
@@ -49,6 +49,9 @@ Notes
 
 Version Information
 ===================
+20th May 2014 Version 2.7.1 - Stable.
+  1.  Stable release for M2.7.
+
 23rd April 2014 Version 2.7.0.1 - BETA
   1.  First beta version for Moodle 2.7beta.
 
@@ -122,6 +125,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 18th November 2013.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 20th May 2014.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard
