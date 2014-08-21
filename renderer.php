@@ -27,11 +27,42 @@
 
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot.'/course/format/renderer.php');
+require_once($CFG->dirroot.'/mod/forum/lib.php');
+
+require_once($CFG->dirroot . "/course/renderer.php");
+class format_noticebd_core_course_renderer extends core_course_renderer {
+
+    protected $newsforumcmid;
+    protected $editing;
+
+    public function __construct(moodle_page $page, $target, $newsforumcmid, $editing) {
+        $this->strings = new stdClass;
+        plugin_renderer_base::__construct($page, $target);
+        // Note: Cannot call parent constructor because of $this->add_modchoosertoggle(); so call grandparent class and do strings init here.
+        $this->newsforumcmid = $newsforumcmid;
+        $this->editing = $editing;
+    }
+
+    public function course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array()) {
+        $output = '';
+        if (!$this->editing && ($this->newsforumcmid == $mod->id)) {
+            // Do not print the forum.
+        } else if ($modulehtml = $this->course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions)) {
+            $modclasses = 'activity ' . $mod->modname . ' modtype_' . $mod->modname . ' ' . $mod->extraclasses;
+            $output .= html_writer::tag('li', $modulehtml, array('class' => $modclasses, 'id' => 'module-' . $mod->id));
+        }
+        return $output;
+    }
+}
 
 /**
  * Basic renderer for Noticeboard course format.
  */
 class format_noticebd_renderer extends format_section_renderer_base {
+
+    protected $newsforum;
+    protected $newsforumcm;
+    private $courseformat = null; // Our course format object as defined in lib.php.
 
     /**
      * Constructor method, calls the parent constructor - MDL-21097
@@ -45,6 +76,16 @@ class format_noticebd_renderer extends format_section_renderer_base {
         // Since format_noticebd_renderer::section_edit_controls() only displays the 'Set current section' control when editing mode is on
         // we need to be sure that the link 'Turn editing mode on' is available for a user who does not have any other managing capability.
         $page->set_other_editing_capability('moodle/course:setcurrentsection');
+
+        $this->courseformat = course_get_format($page->course);
+
+        if ($this->newsforum = forum_get_course_forum($page->course->id, 'news')) {
+            $this->newsforumcm = get_coursemodule_from_instance('forum', $this->newsforum->id);
+        } else {
+            $this->newsforumcm = 0;
+        }
+        $newsforumcmid = ($this->newsforumcm) ? $this->newsforumcm->id : 0;
+        $this->courserenderer = new format_noticebd_core_course_renderer($page, $target, $newsforumcmid, $page->user_is_editing());
     }
 
     /**
@@ -123,14 +164,12 @@ class format_noticebd_renderer extends format_section_renderer_base {
      */
     private function print_noticeboard($course) {
         global $OUTPUT;
-        if ($forum = forum_get_course_forum($course->id, 'news')) {
-            $cm = get_coursemodule_from_instance('forum', $forum->id);
-            $context = context_module::instance($cm->id);
+        if ($this->newsforumcm) {
+            $context = context_module::instance($this->newsforumcm->id);
 
             echo $this->output->heading(get_string('latestmessage','format_noticebd'), 3, 'sectionname');
-            echo '<div class="subscribelink">', forum_get_subscribe_link($forum, $context), '</div>';
-            echo forum_print_latest_discussions($course, $forum, 1, 'plain', '', -1, -1, -1, 100, $cm);
-
+            echo '<div class="subscribelink">', forum_get_subscribe_link($this->newsforum, $context), '</div>';
+            echo forum_print_latest_discussions($course, $this->newsforum, 1, 'plain', '', -1, -1, -1, 100, $this->newsforumcm);
         } else {
             echo $OUTPUT->notification('Could not find or create a news forum here');
         }
@@ -149,20 +188,20 @@ class format_noticebd_renderer extends format_section_renderer_base {
     public function print_single_section_page($course, $sections, $mods, $modnames, $modnamesused, $displaysection) {
         global $PAGE, $USER;
 
-        // Can we view the section in question?
-        $context = context_course::instance($course->id);
-        $canviewhidden = has_capability('moodle/course:viewhiddensections', $context);
+        $course = $this->courseformat->get_course();
+        $modinfo = get_fast_modinfo($course);
 
-        if (!isset($sections[$displaysection])) {
+        // Can we view the section in question?
+        if (!($sectioninfo = $modinfo->get_section_info($displaysection))) {
             // This section doesn't exist
             print_error('unknowncoursesection', 'error', null, $course->fullname);
             return;
         }
 
-        if (!$sections[$displaysection]->visible && !$canviewhidden) {
+        if (!$sectioninfo->uservisible) {
             if (!$course->hiddensections) {
                 echo $this->start_section_list();
-                echo $this->section_hidden($displaysection);
+                echo $this->section_hidden($displaysection, $course->id);
                 echo $this->end_section_list();
             }
             // Can't view this section.
@@ -171,20 +210,15 @@ class format_noticebd_renderer extends format_section_renderer_base {
 
         // Copy activity clipboard..
         echo $this->course_activity_clipboard($course, $displaysection);
-
-        // General section if non-empty.
-        $thissection = $sections[0];
-        //if ($thissection->summary or $thissection->sequence or $PAGE->user_is_editing()) {
+        $thissection = $modinfo->get_section_info(0);
+        if ($thissection->summary or !empty($modinfo->sections[0]) or $PAGE->user_is_editing()) {
             echo $this->start_section_list();
             echo $this->section_header($thissection, $course, true, $displaysection);
-            $this->print_noticeboard($course);
-            if (($PAGE->user_is_editing()) && (is_siteadmin($USER))) {
-                print_section($course, $thissection, $mods, $modnamesused, true, "100%", false, $displaysection);
-                print_section_add_menus($course, 0, $modnames, false, false, $displaysection);
-            }
+            echo $this->courserenderer->course_section_cm_list($course, $thissection, $displaysection);
+            echo $this->courserenderer->course_section_add_cm_control($course, 0, $displaysection);
             echo $this->section_footer();
             echo $this->end_section_list();
-        //}
+        }
 
         // Start single-section div
         echo html_writer::start_tag('div', array('class' => 'single-section'));
@@ -246,7 +280,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
         global $PAGE, $USER;
 
         $modinfo = get_fast_modinfo($course);
-        $course = course_get_format($course)->get_course();
+        $course = $this->courseformat->get_course();
 
         $context = context_course::instance($course->id);
         // Title with completion help icon.
@@ -265,11 +299,11 @@ class format_noticebd_renderer extends format_section_renderer_base {
                 // 0-section is displayed a little different then the others
                 if ($thissection->summary or !empty($modinfo->sections[0]) or $PAGE->user_is_editing()) {
                     echo $this->section_header($thissection, $course, false, 0);
-                    $this->print_noticeboard($course);
+                    echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
                     if (($PAGE->user_is_editing()) && (is_siteadmin($USER))) {
-                        echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
                         echo $this->courserenderer->course_section_add_cm_control($course, 0, 0);
                     }
+                    $this->print_noticeboard($course);
                     echo $this->section_footer();
                 }
                 continue;
