@@ -30,28 +30,101 @@ require_once($CFG->dirroot.'/course/format/renderer.php');
 require_once($CFG->dirroot.'/mod/forum/lib.php');
 
 require_once($CFG->dirroot . "/course/renderer.php");
-class format_noticebd_core_course_renderer extends core_course_renderer {
+class format_noticebd_core_course_renderer /* extends core_course_renderer */ {
 
+    protected $courserenderer;
+    protected $output;
+    protected $page;
     protected $newsforumcmid;
     protected $editing;
 
-    public function __construct(moodle_page $page, $target, $newsforumcmid, $editing) {
-        $this->strings = new stdClass;
-        plugin_renderer_base::__construct($page, $target);
-        // Note: Cannot call parent constructor because of $this->add_modchoosertoggle(); so call grandparent class and do strings init here.
+    public function __construct(core_course_renderer $courserenderer, moodle_page $page, $target, $newsforumcmid) {
+        $this->courserenderer = $courserenderer;
+        $this->output = $page->get_renderer('core', null, $target);
+        $this->page = $page;
         $this->newsforumcmid = $newsforumcmid;
-        $this->editing = $editing;
+        $this->editing = $this->page->user_is_editing();
     }
 
+    /* Because core_course_renderer can be overridden in a theme and actually be another class when we would not know about it.
+       Then we need to be a wrapper class containing the class and pass through the calls we as format_noticebd_renderer make on it. */
     public function course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array()) {
         $output = '';
         if (!$this->editing && ($this->newsforumcmid == $mod->id)) {
             // Do not print the forum.
-        } else if ($modulehtml = $this->course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions)) {
+        } else if ($modulehtml = $this->courserenderer->course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions)) {
             $modclasses = 'activity ' . $mod->modname . ' modtype_' . $mod->modname . ' ' . $mod->extraclasses;
             $output .= html_writer::tag('li', $modulehtml, array('class' => $modclasses, 'id' => 'module-' . $mod->id));
         }
         return $output;
+    }
+
+    public function course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array()) {
+        global $USER;
+
+        $output = '';
+        $modinfo = get_fast_modinfo($course);
+        if (is_object($section)) {
+            $section = $modinfo->get_section_info($section->section);
+        } else {
+            $section = $modinfo->get_section_info($section);
+        }
+        $completioninfo = new completion_info($course);
+
+        // check if we are currently in the process of moving a module with JavaScript disabled
+        $ismoving = $this->page->user_is_editing() && ismoving($course->id);
+        if ($ismoving) {
+            $movingpix = new pix_icon('movehere', get_string('movehere'), 'moodle', array('class' => 'movetarget'));
+            $strmovefull = strip_tags(get_string("movefull", "", "'$USER->activitycopyname'"));
+        }
+
+        // Get the list of modules visible to user (excluding the module being moved if there is one)
+        $moduleshtml = array();
+        if (!empty($modinfo->sections[$section->section])) {
+            foreach ($modinfo->sections[$section->section] as $modnumber) {
+                $mod = $modinfo->cms[$modnumber];
+
+                if ($ismoving and $mod->id == $USER->activitycopy) {
+                    // do not display moving mod
+                    continue;
+                }
+
+                if ($modulehtml = $this->course_section_cm_list_item($course,
+                        $completioninfo, $mod, $sectionreturn, $displayoptions)) {
+                    $moduleshtml[$modnumber] = $modulehtml;
+                }
+            }
+        }
+
+        $sectionoutput = '';
+        if (!empty($moduleshtml) || $ismoving) {
+            foreach ($moduleshtml as $modnumber => $modulehtml) {
+                if ($ismoving) {
+                    $movingurl = new moodle_url('/course/mod.php', array('moveto' => $modnumber, 'sesskey' => sesskey()));
+                    $sectionoutput .= html_writer::tag('li',
+                            html_writer::link($movingurl, $this->output->render($movingpix), array('title' => $strmovefull)),
+                            array('class' => 'movehere'));
+                }
+
+                $sectionoutput .= $modulehtml;
+            }
+
+            if ($ismoving) {
+                $movingurl = new moodle_url('/course/mod.php', array('movetosection' => $section->id, 'sesskey' => sesskey()));
+                $sectionoutput .= html_writer::tag('li',
+                        html_writer::link($movingurl, $this->output->render($movingpix), array('title' => $strmovefull)),
+                        array('class' => 'movehere'));
+            }
+        }
+
+        // Always output the section module list.
+        $output .= html_writer::tag('ul', $sectionoutput, array('class' => 'section img-text'));
+
+        return $output;
+    }
+
+    function course_section_add_cm_control($course, $section, $sectionreturn = null, $displayoptions = array()) {
+        return $this->courserenderer->course_section_add_cm_control($course, $section, $sectionreturn, $displayoptions);
     }
 }
 
@@ -85,7 +158,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
             $this->newsforumcm = 0;
         }
         $newsforumcmid = ($this->newsforumcm) ? $this->newsforumcm->id : 0;
-        $this->courserenderer = new format_noticebd_core_course_renderer($page, $target, $newsforumcmid, $page->user_is_editing());
+        $this->courserenderer = new format_noticebd_core_course_renderer($this->courserenderer, $page, $target, $newsforumcmid);
     }
 
     /**
@@ -162,7 +235,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
      * @global stdClass $OUTPUT Output renderer instance.
      * @param stdClass $course The course to use.
      */
-    private function print_noticeboard($course) {
+    public function print_noticeboard($course) {
         global $OUTPUT;
         if ($this->newsforumcm) {
             $context = context_module::instance($this->newsforumcm->id);
@@ -211,14 +284,15 @@ class format_noticebd_renderer extends format_section_renderer_base {
         // Copy activity clipboard..
         echo $this->course_activity_clipboard($course, $displaysection);
         $thissection = $modinfo->get_section_info(0);
+        echo $this->start_section_list();
+        echo $this->section_header($thissection, $course, true, $displaysection);
         if ($thissection->summary or !empty($modinfo->sections[0]) or $PAGE->user_is_editing()) {
-            echo $this->start_section_list();
-            echo $this->section_header($thissection, $course, true, $displaysection);
             echo $this->courserenderer->course_section_cm_list($course, $thissection, $displaysection);
             echo $this->courserenderer->course_section_add_cm_control($course, 0, $displaysection);
-            echo $this->section_footer();
-            echo $this->end_section_list();
         }
+        $this->print_noticeboard($course);
+        echo $this->section_footer();
+        echo $this->end_section_list();
 
         // Start single-section div
         echo html_writer::start_tag('div', array('class' => 'single-section'));
