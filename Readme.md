@@ -4,11 +4,21 @@ Topic based course format with the latest post in the news forum displayed at th
 
 Required version of Moodle
 ==========================
-This version works with Moodle version 2014051200.00 release 2.7 (Build: 20140512) and above within the 2.7 branch until the
+This version works with Moodle version 2014111000.00 release 2.8 (Build: 20141110) and above within the 2.8 branch until the
 next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/27/en/Installing_Moodle'.
+'docs.moodle.org/28/en/Installing_Moodle'.
+
+Supporting Noticeboard development
+==================================
+If you find Noticeboard useful and beneficial, please consider donating by:
+
+PayPal - Please contact me via my 'Moodle profile' (above) for details as I am an individual and therefore am unable to have 'donation' / 'buy me now' buttons under their terms.
+
+Flattr - https://flattr.com/profile/gjb2048
+
+I develop and maintain for free and any donations to assist me in this endeavour are appreciated
 
 Installation
 ============
@@ -49,6 +59,9 @@ Notes
 
 Version Information
 ===================
+10th November 2014 Version 2.8.0.1 - Release Candidate
+  1.  Release candidate for Moodle 2.8 - NOT for production servers.
+
 20th May 2014 Version 2.7.1 - Stable.
   1.  Stable release for M2.7.
 
@@ -125,6 +138,6 @@ for Moodle.
 Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (www.side.wa.edu.au).
 
 
-G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE. - 20th May 2014.
+G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE.
 Moodle profile: moodle.org/user/profile.php?id=442195.
 Web profile   : about.me/gjbarnard
