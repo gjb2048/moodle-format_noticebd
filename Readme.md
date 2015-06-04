@@ -4,17 +4,18 @@ Topic based course format with the latest post in the news forum displayed at th
 
 Required version of Moodle
 ==========================
-This version works with Moodle version 2014111000.00 release 2.8 (Build: 20141110) and above within the 2.8 branch until the
+This version works with Moodle version 2015051100.00 2.9 (Build: 20150511) and above within the 2.9 branch until the
 next release.
 
 Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
-'docs.moodle.org/28/en/Installing_Moodle'.
+'docs.moodle.org/29/en/Installing_Moodle'.
 
 Supporting Noticeboard development
 ==================================
 If you find Noticeboard useful and beneficial, please consider donating by:
 
-PayPal - Please contact me via my 'Moodle profile' (above) for details as I am an individual and therefore am unable to have 'donation' / 'buy me now' buttons under their terms.
+PayPal - Please contact me via my 'Moodle profile' (above) for details as I am an individual and therefore am unable
+to have 'donation' / 'buy me now' buttons under their terms.
 
 Flattr - https://flattr.com/profile/gjb2048
 
@@ -47,7 +48,7 @@ Uninstallation
 Usage
 =====
 1. When creating a new course, select the course format as 'Noticeboard format' from the list of available options.
-2. To change an existing course, edit the course settings (http://docs.moodle.org/24/en/course/edit) and select the
+2. To change an existing course, edit the course settings (http://docs.moodle.org/29/en/course/edit) and select the
    'Noticeboard format' from the list of available options.
 
 Notes
@@ -59,6 +60,9 @@ Notes
 
 Version Information
 ===================
+Version 2.9.1.
+  1.  First version for Moodle 2.9.
+
 16th November 2014 Version 2.8.1
   1.  Stable version for Moodle 2.8.
 

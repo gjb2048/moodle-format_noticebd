@@ -27,8 +27,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2014111600;
+$plugin->version = 2015051100;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->requires = 2014111000.00; // 2.8 (Build: 20141110).
+$plugin->requires = 2015051100.00; // 2.9 (Build: 20150511).
 $plugin->component = 'format_noticebd';
-$plugin->release = '2.8.1';
+$plugin->release = '2.9.1';
