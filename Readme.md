@@ -12,14 +12,14 @@ Please ensure that your hardware and software complies with 'Requirements' in 'I
 
 Supporting Noticeboard development
 ==================================
-If you find Noticeboard useful and beneficial, please consider donating by:
+If you find Noticeboard useful and beneficial, please consider sponsoring by:
 
 PayPal - Please contact me via my 'Moodle profile' (above) for details as I am an individual and therefore am unable
-to have 'donation' / 'buy me now' buttons under their terms.
+to have 'buy me now' buttons under their terms.
 
 Flattr - https://flattr.com/profile/gjb2048
 
-I develop and maintain for free and any donations to assist me in this endeavour are appreciated
+I develop and maintain for free and any sponsorships to assist me in this endeavour are appreciated
 
 Installation
 ============
@@ -60,31 +60,34 @@ Notes
 
 Version Information
 ===================
+Version 2.9.1.1
+  1. Update readme.
+
 Version 2.9.1.
-  1.  First version for Moodle 2.9.
+  1. First version for Moodle 2.9.
 
 16th November 2014 Version 2.8.1
-  1.  Stable version for Moodle 2.8.
+  1. Stable version for Moodle 2.8.
 
 10th November 2014 Version 2.8.0.1 - Release Candidate
-  1.  Release candidate for Moodle 2.8 - NOT for production servers.
+  1. Release candidate for Moodle 2.8 - NOT for production servers.
 
 20th May 2014 Version 2.7.1 - Stable.
-  1.  Stable release for M2.7.
+  1. Stable release for M2.7.
 
 23rd April 2014 Version 2.7.0.1 - BETA
-  1.  First beta version for Moodle 2.7beta.
+  1. First beta version for Moodle 2.7beta.
 
 18th November 2013 Version 2.6.1
-  1.  Stable release for Moodle 2.6.
+  1. Stable release for Moodle 2.6.
 
 14th November 2013 Version 2.6.0.1
-  1.  Initial BETA code for Moodle 2.6.
-  2.  Changes for 'Accessibility' based upon MDL-41252.
-  3.  Implemented MDL-21097.
+  1. Initial BETA code for Moodle 2.6.
+  2. Changes for 'Accessibility' based upon MDL-41252.
+  3. Implemented MDL-21097.
 
 14th May 2013 Version 2.5.1 - Stable
-  1.  First stable version for Moodle 2.5 stable.
+  1. First stable version for Moodle 2.5 stable.
 
 12th May 2013 - Version 2.5.0.2 - Beta
   1. Changes for MDL-39542.
