@@ -121,7 +121,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
      * @global stdClass $OUTPUT Output renderer instance.
      * @param stdClass $course The course to use.
      */
-    private function print_noticeboard($course) {
+    protected function print_noticeboard($course) {
         global $OUTPUT;
         if ($forum = forum_get_course_forum($course->id, 'news')) {
             $cm = get_coursemodule_from_instance('forum', $forum->id);
