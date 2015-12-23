@@ -218,8 +218,8 @@ class format_noticebd_renderer extends format_section_renderer_base {
         echo $this->section_header($thissection, $course, true, $displaysection);
         $this->print_noticeboard($course);
         if (($PAGE->user_is_editing()) && (is_siteadmin($USER))) {
-            print_section($course, $thissection, $mods, $modnamesused, true, "100%", false, $displaysection);
-            print_section_add_menus($course, 0, $modnames, false, false, $displaysection);
+            echo $this->courserenderer->course_section_cm_list($course, $thissection, $displaysection);
+            echo $this->courserenderer->course_section_add_cm_control($course, $displaysection, $displaysection);
         }
         echo $this->section_footer();
         echo $this->end_section_list();
