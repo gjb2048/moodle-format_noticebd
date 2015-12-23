@@ -40,7 +40,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Generic strings
+// Generic strings.
 $string['currentsection'] = 'This topic';
 $string['sectionname'] = 'Topic';
 $string['pluginname'] = 'Noticeboard format';
