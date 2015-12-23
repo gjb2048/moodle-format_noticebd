@@ -35,5 +35,9 @@ $string['page-course-view-noticebd-x'] = 'Any course page in noticeboard format'
 $string['hidefromothers'] = 'Hide topic';
 $string['showfromothers'] = 'Show topic';
 
+// Moodle 3.0 Enhancement.
+$string['editsection'] = 'Edit topic';
+$string['deletesection'] = 'Delete topic';
+
 // Noticeboard specific.
 $string['latestmessage'] = 'Noticeboard - latest message';

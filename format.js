@@ -100,7 +100,8 @@ M.course.format.process_sections = function(Y, sectionlist, response, sectionfro
         // Update titles and move icons in all affected sections.
         for (var i = sectionfrom; i <= sectionto; i++) {
             // Update section title.
-            sectionlist.item(i).one('.'+CSS.SECTIONNAME).setContent(response.sectiontitles[i]);
+            var content = Y.Node.create('<span>' + response.sectiontitles[i] + '</span>');
+            sectionlist.item(i).all('.'+CSS.SECTIONNAME).setHTML(content);
             // Update move icon.
             ele = sectionlist.item(i).one('.'+CSS.SECTIONLEFTSIDE);
             str = ele.getAttribute('alt');

@@ -80,10 +80,9 @@ class format_noticebd_renderer extends format_section_renderer_base {
      * @param bool $onsectionpage true if being printed on a section page
      * @return array of links with edit controls
      */
-    protected function section_edit_controls($course, $section, $onsectionpage = false) {
-        global $PAGE;
+    protected function section_edit_control_items($course, $section, $onsectionpage = false) {
 
-        if (!$PAGE->user_is_editing()) {
+        if (!$this->page->user_is_editing()) {
             return array();
         }
 
@@ -96,24 +95,48 @@ class format_noticebd_renderer extends format_section_renderer_base {
         }
         $url->param('sesskey', sesskey());
 
+        $isstealth = $section->section > $course->numsections;
         $controls = array();
-        if (has_capability('moodle/course:setcurrentsection', $coursecontext)) {
+        if (!$isstealth && $section->section && has_capability('moodle/course:setcurrentsection', $coursecontext)) {
             if ($course->marker == $section->section) {  // Show the "light globe" on/off.
                 $url->param('marker', 0);
-                $controls[] = html_writer::link($url,
-                                    html_writer::empty_tag('img', array('src' => $this->output->pix_url('i/marked'),
-                                        'class' => 'icon ', 'alt' => get_string('markedthistopic'))),
-                                    array('title' => get_string('markedthistopic'), 'class' => 'editing_highlight'));
+                $markedthissection = get_string('markedthistopic');
+                $highlightoff = get_string('highlightoff');
+                $controls['highlight'] = array('url' => $url, "icon" => 'i/marked',
+                                               'name' => $highlightoff,
+                                               'pixattr' => array('class' => '', 'alt' => $markedthissection),
+                                               'attr' => array('class' => 'editing_highlight', 'title' => $markedthissection));
+                $url->param('marker', 0);
             } else {
                 $url->param('marker', $section->section);
-                $controls[] = html_writer::link($url,
-                                html_writer::empty_tag('img', array('src' => $this->output->pix_url('i/marker'),
-                                    'class' => 'icon', 'alt' => get_string('markthistopic'))),
-                                array('title' => get_string('markthistopic'), 'class' => 'editing_highlight'));
+                $markthissection = get_string('markthistopic');
+                $highlight = get_string('highlight');
+                $controls['highlight'] = array('url' => $url, "icon" => 'i/marker',
+                                               'name' => $highlight,
+                                               'pixattr' => array('class' => '', 'alt' => $markthissection),
+                                               'attr' => array('class' => 'editing_highlight', 'title' => $markthissection));
             }
         }
 
-        return array_merge($controls, parent::section_edit_controls($course, $section, $onsectionpage));
+        $parentcontrols = parent::section_edit_control_items($course, $section, $onsectionpage);
+
+        // If the edit key exists, we are going to insert our controls after it.
+        if (array_key_exists("edit", $parentcontrols)) {
+            $merged = array();
+            // We can't use splice because we are using associative arrays.
+            // Step through the array and merge the arrays.
+            foreach ($parentcontrols as $key => $action) {
+                $merged[$key] = $action;
+                if ($key == "edit") {
+                    // If we have come to the edit key, merge these controls here.
+                    $merged = array_merge($merged, $controls);
+                }
+            }
+
+            return $merged;
+        } else {
+            return array_merge($controls, $parentcontrols);
+        }
     }
 
     /**
