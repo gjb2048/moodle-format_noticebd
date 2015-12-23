@@ -20,18 +20,51 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-.course-content ul.nbtopics {margin:0;}
-.course-content ul.nbtopics li.section {list-style: none;margin:5px 0 0 0;padding:0;}
-.course-content ul.nbtopics li.section .content {margin:0 40px;}
-.course-content ul.nbtopics li.section .left {width:40px;float:left;text-align:center;}
-.course-content ul.nbtopics li.section .right {width:40px;float:right;text-align:center;}
+.course-content ul.nbtopics {
+    margin:0;
+}
+
+.course-content ul.nbtopics li.section {
+    list-style: none;
+    margin:5px 0 0 0;
+    padding:0;
+}
+
+.course-content ul.nbtopics li.section .content {
+    margin:0 40px;
+}
+.course-content ul.nbtopics li.section .left {
+    width:40px;
+    float:left;
+    text-align:center;
+}
+.course-content ul.nbtopics li.section .right {
+    width:40px;
+    float:right;
+    text-align:center;
+}
 
 .forumolddiscuss {
   float: right;
 }
 
 /* Make everything line up within the styles designed for a course, using 'nbtopics' class in selector to avoid overspill of styles. */
-.course-content ul.nbtopics li.section .content .forumpost .row .left {width:43px;} /* Standard width of fourm left content. */
-.course-content ul.nbtopics li.section .content .forumpost .maincontent .no-overflow .content {margin:0px; padding-left: 0px; padding-top: 0px;} /* Counteract effect of two 'content' class selectors one for courses and the other for forums. */
-.course-content ul.nbtopics li.section .content .forumpost .maincontent .no-overflow .content .attachments {padding-right: 3px;} /* Make attachments not flush on the right. */
-.course-content ul.nbtopics li.section .content .forumpost .maincontent .no-overflow .content .posting {margin-left: 10px;} /* Tweek for IE8. */
+.course-content ul.nbtopics li.section .content .forumpost .row .left {
+    width:43px; /* Standard width of fourm left content. */
+}
+
+/* Counteract effect of two 'content' class selectors one for courses and the other for forums. */
+.course-content ul.nbtopics li.section .content .forumpost .maincontent .no-overflow .content {
+    margin:0;
+    padding-left: 0;
+    padding-top: 0;
+}
+
+ /* Make attachments not flush on the right. */
+.course-content ul.nbtopics li.section .content .forumpost .maincontent .no-overflow .content .attachments {
+    padding-right: 3px;
+}
+
+.course-content ul.nbtopics li.section .content .forumpost .maincontent .no-overflow .content .posting {
+    margin-left: 10px;
+}

@@ -1,4 +1,19 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Noticeboard course format.  Topic based course format with the latest
  * post in the news forum displayed at the top.
@@ -37,7 +52,7 @@ require_once($CFG->dirroot. '/course/format/lib.php');
  */
 class format_noticebd extends format_base {
 
-     /**
+    /**
      * Returns the default section name for the format.
      *
      * @param stdClass $section Section object from database or just field course_sections section
@@ -147,7 +162,7 @@ class format_noticebd extends format_base {
      */
     public function extend_course_navigation($navigation, navigation_node $node) {
         global $PAGE;
-        // if section is specified in course/view.php, make sure it is expanded in navigation
+        // If section is specified in course/view.php, make sure it is expanded in navigation.
         if ($navigation->includesectionnum === false) {
             $selectedsection = optional_param('section', null, PARAM_INT);
             if ($selectedsection !== null && (!defined('AJAX_SCRIPT') || AJAX_SCRIPT == '0') &&
@@ -156,7 +171,7 @@ class format_noticebd extends format_base {
             }
         }
 
-        // check if there are callbacks to extend course navigation
+        // Check if there are callbacks to extend course navigation.
         parent::extend_course_navigation($navigation, $node);
     }
 
@@ -167,7 +182,7 @@ class format_noticebd extends format_base {
      *
      * @return array This will be passed in ajax respose
      */
-    function ajax_section_move() {
+    public function ajax_section_move() {
         global $PAGE;
         $titles = array();
         $course = $this->get_course();
@@ -294,13 +309,13 @@ class format_noticebd extends format_base {
                     if (array_key_exists($key, $oldcourse)) {
                         $data[$key] = $oldcourse[$key];
                     } else if ($key === 'numsections') {
-                        // If previous format does not have the field 'numsections'
-                        // and $data['numsections'] is not set,
-                        // we fill it with the maximum section number from the DB
+                        /* If previous format does not have the field 'numsections'
+                           and $data['numsections'] is not set,
+                           we fill it with the maximum section number from the DB. */
                         $maxsection = $DB->get_field_sql('SELECT max(section) from {course_sections}
                             WHERE course = ?', array($this->courseid));
                         if ($maxsection) {
-                            // If there are no sections, or just default 0-section, 'numsections' will be set to default
+                            // If there are no sections, or just default 0-section, 'numsections' will be set to default.
                             $data['numsections'] = $maxsection;
                         }
                     }

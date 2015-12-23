@@ -1,4 +1,19 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Noticeboard course format.  Topic based course format with the latest
  * post in the news forum displayed at the top.
@@ -42,8 +57,9 @@ class format_noticebd_renderer extends format_section_renderer_base {
     public function __construct(moodle_page $page, $target) {
         parent::__construct($page, $target);
 
-        // Since format_noticebd_renderer::section_edit_controls() only displays the 'Set current section' control when editing mode is on
-        // we need to be sure that the link 'Turn editing mode on' is available for a user who does not have any other managing capability.
+        /* Since format_noticebd_renderer::section_edit_controls() only displays the 'Set current section' control when editing
+           mode is on we need to be sure that the link 'Turn editing mode on' is available for a user who does not have any other
+           managing capability. */
         $page->set_other_editing_capability('moodle/course:setcurrentsection');
     }
 
@@ -150,7 +166,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
             $cm = get_coursemodule_from_instance('forum', $forum->id);
             $context = context_module::instance($cm->id);
 
-            echo $this->output->heading(get_string('latestmessage','format_noticebd'), 3, 'sectionname');
+            echo $this->output->heading(get_string('latestmessage', 'format_noticebd'), 3, 'sectionname');
             echo '<div class="subscribelink">', forum_get_subscribe_link($forum, $context), '</div>';
             echo forum_print_latest_discussions($course, $forum, 1, 'plain', '', -1, -1, -1, 100, $cm);
 
@@ -177,7 +193,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
         $canviewhidden = has_capability('moodle/course:viewhiddensections', $context);
 
         if (!isset($sections[$displaysection])) {
-            // This section doesn't exist
+            // This section doesn't exist.
             print_error('unknowncoursesection', 'error', null, $course->fullname);
             return;
         }
@@ -197,19 +213,18 @@ class format_noticebd_renderer extends format_section_renderer_base {
 
         // General section if non-empty.
         $thissection = $sections[0];
-        //if ($thissection->summary or $thissection->sequence or $PAGE->user_is_editing()) {
-            echo $this->start_section_list();
-            echo $this->section_header($thissection, $course, true, $displaysection);
-            $this->print_noticeboard($course);
-            if (($PAGE->user_is_editing()) && (is_siteadmin($USER))) {
-                print_section($course, $thissection, $mods, $modnamesused, true, "100%", false, $displaysection);
-                print_section_add_menus($course, 0, $modnames, false, false, $displaysection);
-            }
-            echo $this->section_footer();
-            echo $this->end_section_list();
-        //}
 
-        // Start single-section div
+        echo $this->start_section_list();
+        echo $this->section_header($thissection, $course, true, $displaysection);
+        $this->print_noticeboard($course);
+        if (($PAGE->user_is_editing()) && (is_siteadmin($USER))) {
+            print_section($course, $thissection, $mods, $modnamesused, true, "100%", false, $displaysection);
+            print_section_add_menus($course, 0, $modnames, false, false, $displaysection);
+        }
+        echo $this->section_footer();
+        echo $this->end_section_list();
+
+        // Start single-section div.
         echo html_writer::start_tag('div', array('class' => 'single-section'));
 
         // Title with section navigation links.
@@ -218,7 +233,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
         $sectiontitle .= html_writer::start_tag('div', array('class' => 'section-navigation navigationtitle'));
         $sectiontitle .= html_writer::tag('span', $sectionnavlinks['previous'], array('class' => 'mdl-left'));
         $sectiontitle .= html_writer::tag('span', $sectionnavlinks['next'], array('class' => 'mdl-right'));
-        // Title attributes
+        // Title attributes.
         $classes = 'sectionname';
         if (!$thissection->visible) {
             $classes .= ' dimmed_text';
@@ -252,7 +267,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
         $sectionbottomnav .= html_writer::end_tag('div');
         echo $sectionbottomnav;
 
-        // close single-section div.
+        // Close single-section div.
         echo html_writer::end_tag('div');
     }
 
@@ -285,7 +300,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
 
         foreach ($modinfo->get_section_info_all() as $section => $thissection) {
             if ($section == 0) {
-                // 0-section is displayed a little different then the others
+                // Section zero is displayed a little different then the others.
                 if ($thissection->summary or !empty($modinfo->sections[0]) or $PAGE->user_is_editing()) {
                     echo $this->section_header($thissection, $course, false, 0);
                     $this->print_noticeboard($course);
@@ -298,17 +313,16 @@ class format_noticebd_renderer extends format_section_renderer_base {
                 continue;
             }
             if ($section > $course->numsections) {
-                // activities inside this section are 'orphaned', this section will be printed as 'stealth' below
+                // Activities inside this section are 'orphaned', this section will be printed as 'stealth' below.
                 continue;
             }
-            // Show the section if the user is permitted to access it, OR if it's not available
-            // but showavailability is turned on (and there is some available info text).
+            /* Show the section if the user is permitted to access it, OR if it's not available
+               but showavailability is turned on (and there is some available info text). */
             $showsection = $thissection->uservisible ||
                     ($thissection->visible && !$thissection->available && $thissection->showavailability
                     && !empty($thissection->availableinfo));
             if (!$showsection) {
-                // Hidden section message is overridden by 'unavailable' control
-                // (showavailability option).
+                // Hidden section message is overridden by 'unavailable' control (showavailability option).
                 if (!$course->hiddensections && $thissection->available) {
                     echo $this->section_hidden($section, $course->id);
                 }
@@ -333,7 +347,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
             // Print stealth sections if present.
             foreach ($modinfo->get_section_info_all() as $section => $thissection) {
                 if ($section <= $course->numsections or empty($modinfo->sections[$section])) {
-                    // this is not stealth section or it is empty
+                    // This is not stealth section or it is empty.
                     continue;
                 }
                 echo $this->stealth_section_header($section);

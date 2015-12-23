@@ -64,9 +64,9 @@ M.course.format.swap_sections = function(Y, node1, node2) {
         SECTIONADDMENUS : 'section_add_menus'
     };
 
-    var sectionlist = Y.Node.all('.'+CSS.COURSECONTENT+' '+M.course.format.get_section_selector(Y));
+    var sectionlist = Y.Node.all('.' + CSS.COURSECONTENT + ' ' + M.course.format.get_section_selector(Y));
     // Swap menus
-    sectionlist.item(node1).one('.'+CSS.SECTIONADDMENUS).swap(sectionlist.item(node2).one('.'+CSS.SECTIONADDMENUS));
+    sectionlist.item(node1).one('.' + CSS.SECTIONADDMENUS).swap(sectionlist.item(node2).one('.' + CSS.SECTIONADDMENUS));
 }
 
 /**
@@ -103,7 +103,7 @@ M.course.format.process_sections = function(Y, sectionlist, response, sectionfro
             var content = Y.Node.create('<span>' + response.sectiontitles[i] + '</span>');
             sectionlist.item(i).all('.'+CSS.SECTIONNAME).setHTML(content);
             // Update move icon.
-            ele = sectionlist.item(i).one('.'+CSS.SECTIONLEFTSIDE);
+            ele = sectionlist.item(i).one('.' + CSS.SECTIONLEFTSIDE);
             str = ele.getAttribute('alt');
             stridx = str.lastIndexOf(' ');
             newstr = str.substr(0, stridx +1) + i;
