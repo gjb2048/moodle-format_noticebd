@@ -43,7 +43,7 @@
 // Generic strings.
 $string['currentsection'] = 'This topic';
 $string['sectionname'] = 'Topic';
-$string['pluginname'] = 'Noticeboard format';
+$string['pluginname'] = 'Noticeboard';
 $string['section0name'] = 'General';
 $string['page-course-view-noticebd'] = 'Any course main page in noticeboard format';
 $string['page-course-view-noticebd-x'] = 'Any course page in noticeboard format';

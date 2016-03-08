@@ -1,5 +1,9 @@
 Version Information
 ===================
+Version 3.0.1
+  1. Implement MDL-26226.
+  2. Renamed plugin from 'Noticeboard format' to just 'Noticeboard'.
+
 Version 3.0.0.1
   1. Make 'print_noticeboard' protected so it can be called by overriding classes.
   2. First version for Moodle 3.0.
