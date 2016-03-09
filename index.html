@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Moodle-format noticebd by gjb2048</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Moodle-format noticebd</h1>
+        <h2>Noticeboard course format for Moodle.</h2>
+        <a href="https://github.com/gjb2048/moodle-format_noticebd" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h1>
+
+<p>Topic based course format with the latest post in the news forum displayed at the top.</p>
+
+<p><a href="https://travis-ci.org/gjb2048/moodle-format_noticebd"><img src="https://travis-ci.org/gjb2048/moodle-format_noticebd.svg?branch=master" alt="Build Status"></a></p>
+
+<h1>
+<a id="required-version-of-moodle" class="anchor" href="#required-version-of-moodle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Required version of Moodle</h1>
+
+<p>This version works with Moodle version 2015111600.00 3.0 (Build: 20151116) and above within the 3.0 branch until the
+next release.</p>
+
+<p>Please ensure that your hardware and software complies with 'Requirements' in 'Installing Moodle' on
+'docs.moodle.org/30/en/Installing_Moodle'.</p>
+
+<h1>
+<a id="supporting-noticeboard-development" class="anchor" href="#supporting-noticeboard-development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Supporting Noticeboard development</h1>
+
+<p>If you find Noticeboard useful and beneficial, please consider sponsoring by:</p>
+
+<p>PayPal - Please contact me via my 'Moodle profile' (above) for details as I am an individual and therefore am unable
+to have 'buy me now' buttons under their terms.</p>
+
+<p>Flattr - <a href="https://flattr.com/profile/gjb2048">https://flattr.com/profile/gjb2048</a></p>
+
+<p>I develop and maintain for free and any sponsorships to assist me in this endeavour are appreciated</p>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h1>
+
+<ol>
+<li>Ensure you have the version of Moodle as stated above in 'Installation Requirements'.  This is essential as the
+format relies on underlying core code.</li>
+<li>If upgrading from a previous version of the format for Moodle 1.9 or 2.0 you should remove the old 'nb' folder
+in '/course/format' and continue.</li>
+<li>If upgrading from the Moodle 2.3 version, make a backup of the old files in the 'noticebd' folder, clear it out
+and replace with all the files in this version.</li>
+<li>Put Moodle in 'Maintenance Mode' on 'docs.moodle.org/en/admin/setting/maintenancemode' so that there are no 
+users using it bar you as the administrator - if you have not already done so.</li>
+<li>Copy 'noticebd' to '/course/format/'.</li>
+<li>Login as an administrator and follow standard the 'plugin' update notification.  If needed, go to
+'Site administration' -&gt; 'Notifications' if this does not happen.</li>
+<li>Put Moodle out of Maintenance Mode.</li>
+</ol>
+
+<h1>
+<a id="uninstallation" class="anchor" href="#uninstallation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Uninstallation</h1>
+
+<ol>
+<li>Put Moodle in 'Maintenance Mode' so that there are no users using it bar you as the administrator.</li>
+<li>It is recommended but not essential to change all of the courses that use the format to another.  If this is
+not done Moodle will pick the last format in your list of formats but display in 'Edit settings' of the
+course the first format in the list.  You can then set the desired format.</li>
+<li>In '/course/format/' remove the folder 'noticebd'.</li>
+<li>Put Moodle out of Maintenance Mode.</li>
+</ol>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h1>
+
+<ol>
+<li>When creating a new course, select the course format as 'Noticeboard format' from the list of available options.</li>
+<li>To change an existing course, edit the course settings (<a href="http://docs.moodle.org/29/en/course/edit">http://docs.moodle.org/29/en/course/edit</a>) and select the
+'Noticeboard format' from the list of available options.</li>
+</ol>
+
+<h1>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notes</h1>
+
+<ol>
+<li>Only administrators can add, edit and remove activities and resources (whilst in the format) from the general
+section (section 0), as to prevent accidental deletion of the 'news' forum upon which the format relies.  If it is
+deleted, then a page refresh will recreate the forum but all previous posts will be lost.</li>
+<li>Any title and summary that has been previously set for the general section will not be shown.</li>
+</ol>
+
+<h1>
+<a id="version-information" class="anchor" href="#version-information" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Version Information</h1>
+
+<p>See Changes.md</p>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
+
+<p>This file is part of Moodle - <a href="http://moodle.org/">http://moodle.org/</a></p>
+
+<p>Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
+
+<p>Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with Moodle.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+
+<h1>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h1>
+
+<p>Credit goes to the original creator of the format 'Marty Jacobs' (moodle.org/user/view.php?id=95155) who originally
+published the format on 'moodle.org/mod/data/view.php?d=13&amp;rid=1717'.  I have rewritten and redistributed the format
+under the terms of the GNU General Public License version 3 (<a href="http://www.gnu.org/licenses/">www.gnu.org/licenses/</a>) which applies to all code written
+for Moodle.</p>
+
+<p>Rewrite funding gratefully received from 'Schools of Isolated and Distance Education' (<a href="http://www.side.wa.edu.au">www.side.wa.edu.au</a>).</p>
+
+<p>G J Barnard MSc. BSc(Hons)(Sndw). MBCS. CEng. CITP. PGCE.
+Moodle profile: moodle.org/user/profile.php?id=442195.
+Web profile   : about.me/gjbarnard</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/gjb2048/moodle-format_noticebd/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/gjb2048/moodle-format_noticebd/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/gjb2048/moodle-format_noticebd"></a> is maintained by <a href="https://github.com/gjb2048">gjb2048</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
