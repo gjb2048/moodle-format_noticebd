@@ -383,5 +383,7 @@ class format_noticebd_renderer extends format_section_renderer_base {
         } else {
             echo $this->end_section_list();
         }
+
+        $PAGE->requires->js_call_amd('format_noticebd/null', 'init');
     }
 }
